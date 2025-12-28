@@ -40,9 +40,7 @@ function App() {
           : (interim += text)
       }
 
-      if (finalChunk) {
-        setFinalText(prev => prev + finalChunk)
-      }
+      if (finalChunk) setFinalText(prev => prev + finalChunk)
       setInterimText(interim)
     }
 
@@ -51,18 +49,13 @@ function App() {
     }
 
     recognitionRef.current = recognition
-
-    return () => {
-      try { recognition.stop() } catch {}
-    }
+    return () => { try { recognition.stop() } catch {} }
   }, [language, isRecording])
 
-  /* 🔹 Toggle Recording */
   const toggleRecording = async () => {
     if (isRecording) {
       setIsRecording(false)
       setInterimText('')
-
       try { recognitionRef.current?.stop() } catch {}
 
       if (mediaRecorderRef.current?.state !== 'inactive') {
@@ -71,9 +64,7 @@ function App() {
       return
     }
 
-    // START RECORDING
     setIsRecording(true)
-
     try { recognitionRef.current?.start() } catch {}
 
     try {
@@ -88,7 +79,7 @@ function App() {
       const mr = new MediaRecorder(stream, { mimeType })
       audioChunksRef.current = []
 
-      mr.ondataavailable = (e) => {
+      mr.ondataavailable = e => {
         if (e.data.size > 0) audioChunksRef.current.push(e.data)
       }
 
@@ -98,9 +89,7 @@ function App() {
 
         try {
           const text = await transcribeAudio(blob)
-          if (text) {
-            setFinalText(prev => prev + (prev ? '\n' : '') + text)
-          }
+          if (text) setFinalText(prev => prev + (prev ? '\n' : '') + text)
         } catch (err) {
           console.error(err)
         } finally {
@@ -112,12 +101,11 @@ function App() {
       mr.start()
       mediaRecorderRef.current = mr
     } catch (err) {
-      console.error('Mic access failed', err)
+      console.error('Mic error', err)
       setIsRecording(false)
     }
   }
 
-  /* 🔹 Clear Transcript */
   const clearText = () => {
     setFinalText('')
     setInterimText('')
@@ -127,25 +115,18 @@ function App() {
     <div
       className="app"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url(${bg})`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${bg})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
       <div className="glass-card">
-        <h1 className="title">VOX</h1>
+        <h1 className="title">Voice to Text</h1>
         <p className="subtitle">Turn speech into words. Instantly.</p>
 
         <div className="controls-row">
-          <Controls
-            isRecording={isRecording}
-            toggleRecording={toggleRecording}
-          />
-
-          <LanguageSelect
-            language={language}
-            setLanguage={setLanguage}
-          />
+          <Controls isRecording={isRecording} toggleRecording={toggleRecording} />
+          <LanguageSelect language={language} setLanguage={setLanguage} />
         </div>
 
         <Transcript
@@ -154,10 +135,7 @@ function App() {
           isLoading={isLoading}
         />
 
-        <Actions
-          finalText={finalText}
-          clearText={clearText}
-        />
+        <Actions finalText={finalText} clearText={clearText} />
       </div>
     </div>
   )

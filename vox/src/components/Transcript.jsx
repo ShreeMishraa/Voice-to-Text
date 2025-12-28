@@ -2,7 +2,7 @@ const Transcript = ({ finalText, interimText, isLoading }) => {
   return (
     <div className="transcript-box">
       {isLoading ? (
-        <p className="loading">Transcribing with Hugging Face…</p>
+        <p className="loading">Transcribing…</p>
       ) : finalText ? (
         <p>{finalText}</p>
       ) : interimText ? (
