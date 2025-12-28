@@ -1,32 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: 'Inter', sans-serif;
 }
 
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
+/* 🔥 Background */
+.app {
+  min-height: 100vh;
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.55)
+    ),
+    url('./assets/bg.jpg') center/cover no-repeat;
+
+    display: flex;
+    /* vertically center */
+    align-items: center;
+    /* horizontally center the flex contents, then nudge the card slightly right
+      using a transform on the card itself for a subtle offset */
+    justify-content: center;
 }
 
-.record-btn {
-  padding: 15px 30px;
-  font-size: 18px;
-}
+/* 🪟 Glass Card */
+.glass-card {
+  width: 400px;
+  padding: 30px;
+  border-radius: 18px;
+  height: fit-content;
+  /* small right offset from exact center */
+  transform: translateX(200px);
 
-.recording {
-  background: crimson;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+
+  text-align: center;
   color: white;
 }
 
-.transcript-box {
-  margin-top: 20px;
-  padding: 15px;
-  background: white;
-  min-height: 200px;
+/* ✍ Typography */
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
-.interim {
-  color: gray;
-  font-style: italic;
+.subtitle {
+  font-size: 14px;
+  opacity: 0.7;
+  margin: 10px 0 30px;
+}
+
+/* 🎙 Record Button */
+.record-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.record-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* 🌍 Language Select */
+.language {
+  margin: 20px 0;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: none;
+  outline: none;
+}
+
+/* 📝 Transcript */
+.transcript-box {
+  margin-top: 20px;
+  padding: 20px;
+  min-height: 160px;
+
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.placeholder {
+  opacity: 0.5;
+}
+
+/* ⚙ Actions */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.actions button {
+  flex: 1;
+  margin: 0 6px;
+  padding: 8px;
+
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  font-size: 13px;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.actions button:hover {
+  background: rgba(255, 255, 255, 0.22);
 }
