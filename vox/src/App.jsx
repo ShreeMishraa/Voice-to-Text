@@ -21,7 +21,6 @@ function App() {
   const [interimText, setInterimText] = useState('')
   const [language, setLanguage] = useState('en-US')
 
-  /* 🔹 Speech Recognition (Live Preview) */
   useEffect(() => {
     if (!SpeechRecognition) return
 
@@ -134,18 +133,20 @@ function App() {
       }}
     >
       <div className="glass-card">
-        <h1 className="title">Voice to Text</h1>
+        <h1 className="title">VOX</h1>
         <p className="subtitle">Turn speech into words. Instantly.</p>
 
-        <Controls
-          isRecording={isRecording}
-          toggleRecording={toggleRecording}
-        />
+        <div className="controls-row">
+          <Controls
+            isRecording={isRecording}
+            toggleRecording={toggleRecording}
+          />
 
-        <LanguageSelect
-          language={language}
-          setLanguage={setLanguage}
-        />
+          <LanguageSelect
+            language={language}
+            setLanguage={setLanguage}
+          />
+        </div>
 
         <Transcript
           finalText={finalText}
